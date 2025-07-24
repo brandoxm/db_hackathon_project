@@ -1,6 +1,7 @@
 package services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
@@ -11,8 +12,12 @@ import java.nio.charset.StandardCharsets;
 
 @Service
 public class AzureMapsService {
+
+    @Value("${azure.maps.api.key}")
+    private String azureMapsApiKey;
+
     private final String AZURE_MAPS_BASE_URL = "https://atlas.microsoft.com/search/address/json";
-    private final String API_KEY = "EQsZJRDLQ0rr3jKBKHzlWdBszjtDhtmVyAGSnZM8LP4EElNcIngBJQQJ99BGACYeBjFXJpWSAAAgAZMPgMp6";
+    private final String API_KEY = azureMapsApiKey;
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
